@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>隐私权政策 — Logexus AI Browser</title>
+<style>
+  body { font-family: -apple-system, "Microsoft YaHei", "PingFang SC", sans-serif; max-width: 760px; margin: 0 auto; padding: 32px 20px; line-height: 1.7; color: #1f2937; }
+  h1 { font-size: 26px; border-bottom: 2px solid #30578a; padding-bottom: 12px; }
+  h2 { font-size: 18px; margin-top: 32px; color: #30578a; }
+  p { margin: 10px 0; }
+  ul { padding-left: 24px; }
+  li { margin: 6px 0; }
+  .meta { color: #6b7280; font-size: 14px; }
+  .contact { background: #f3f4f6; padding: 12px 16px; border-radius: 6px; margin-top: 16px; }
+</style>
+</head>
+<body>
+<h1>Logexus AI Browser 隐私权政策</h1>
+<p class="meta">生效日期：2026 年 8 月 6 日</p>
+
+<p>Logexus AI Browser（以下简称“本扩展”）是一款浏览器自动化引擎，让您自行配置的 AI（如 Claude Code、Cursor 或自研 Agent）通过本地 WebSocket 安全地操作您的浏览器，复用您已有的登录态执行跨网站自动化任务。本隐私权政策说明本扩展处理哪些数据、如何使用、存储与共享方式。</p>
+
+<h2>一、我们处理的数据</h2>
+<ul>
+  <li><strong>网页内容：</strong>为生成自动化操作指令，本扩展会采集您当前页面的 DOM 结构（文本、可交互元素、超链接），并发送给您自行配置的 LLM API 或本地 WebSocket daemon。</li>
+  <li><strong>网络记录：</strong>本扩展在本地审计日志中记录访问过的页面 URL、执行的操作及时间戳，用于任务回溯与执行过程透明展示。</li>
+  <li><strong>身份验证信息（仅在启用 Cookie 导出功能时）：</strong>当您本机的 AI Agent 显式调用 <code>browser.get_cookies</code> 时，按指定域名读取当前登录态 Cookie（Netscape 格式）。</li>
+  <li><strong>配置信息：</strong>您填写的 LLM API Key 及偏好设置，仅保存在您的浏览器本地存储（chrome.storage.local）中。</li>
+</ul>
+
+<h2>二、我们不收集的数据</h2>
+<p>本扩展不收集个人身份信息、健康信息、财务与付款信息、个人通讯、位置信息，不提供任何广告服务，也不进行数据分析或用户画像。</p>
+
+<h2>三、数据用途</h2>
+<ul>
+  <li>生成的自动化操作仅服务于本扩展的单一用途：让 AI 操作浏览器完成您发起的任务。</li>
+  <li>我们不会为实现与本扩展单一用途无关的目的而使用或转移数据。</li>
+</ul>
+
+<h2>四、数据共享与传输</h2>
+<ul>
+  <li>本扩展无自有后端服务器，不向任何第三方出售、共享或传输用户数据。</li>
+  <li>数据流向仅有两类：您自行配置的 LLM API（其数据使用受该 LLM 服务商自身政策的约束）以及您本机的本地 daemon / 原生进程。</li>
+  <li>我们不会为确定信用度或实现贷款而使用或转移数据。</li>
+</ul>
+
+<h2>五、数据存储与保留</h2>
+<ul>
+  <li>配置（API Key）保存在浏览器本地，您可随时在扩展设置中清除。</li>
+  <li>审计日志保存在浏览器 IndexedDB 中，您可一键清空。</li>
+  <li>卸载本扩展将删除所有本地数据。</li>
+</ul>
+
+<h2>六、用户控制</h2>
+<ul>
+  <li>每次会话强制授权：本扩展在执行操作前需经您确认。</li>
+  <li>关闭标签页即停止所有操作。</li>
+  <li>您可随时清除本地日志与配置。</li>
+</ul>
+
+<h2>七、政策更新</h2>
+<p>如本政策发生变更，我们将更新本页面，并在扩展商店的说明中同步。变更后继续使用本扩展即视为接受更新后的政策。</p>
+
+<h2>八、联系我们</h2>
+<div class="contact">
+  <p>如对本隐私权政策或本扩展的数据处理有任何疑问，请联系我们：<br>
+  <strong>联系邮箱：jakmax@163.com</strong></p>
+</div>
+
+</body>
+</html>
