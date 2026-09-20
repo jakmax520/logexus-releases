@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>隐私权政策 — Logexus</title>
+<style>
+  body { font-family: -apple-system, "Microsoft YaHei", "PingFang SC", sans-serif; max-width: 760px; margin: 0 auto; padding: 32px 20px; line-height: 1.7; color: #1f2937; }
+  h1 { font-size: 26px; border-bottom: 2px solid #30578a; padding-bottom: 12px; }
+  h2 { font-size: 18px; margin-top: 32px; color: #30578a; }
+  h3 { font-size: 15px; margin-top: 22px; color: #374151; }
+  p { margin: 10px 0; }
+  ul { padding-left: 24px; }
+  li { margin: 6px 0; }
+  code { background: #f3f4f6; padding: 1px 5px; border-radius: 4px; font-size: 13px; }
+  .meta { color: #6b7280; font-size: 14px; }
+  .contact { background: #f3f4f6; padding: 12px 16px; border-radius: 6px; margin-top: 16px; }
+  .lead { background: #f8fafc; border-left: 3px solid #30578a; padding: 12px 16px; margin: 16px 0; }
+  hr { border: 0; border-top: 1px solid #e5e7eb; margin: 48px 0; }
+  .en { color: #374151; }
+  .en h1, .en h2 { color: #30578a; }
+</style>
+</head>
+<body>
+
+<h1>Logexus 隐私权政策</h1>
+<p class="meta">生效日期：2026 年 9 月 20 日 ｜ 最近更新：2026 年 9 月 20 日</p>
+
+<p>Logexus 是一款桌面应用（Windows / macOS），把人工智能与你日常使用的各类服务连接起来：你在应用内配置「连接器」后，AI 便可代你读取资料、执行操作、完成你发起的任务。</p>
+
+<p>本隐私权政策说明 Logexus 处理哪些数据、如何使用、存储与共享，以及你如何查看、导出与删除这些数据。</p>
+
+<div class="lead">
+<strong>一句话概括：</strong>Logexus 的本地优先（local-first）设计意味着 —— 你的凭据与第三方服务数据<strong>保存在你自己的电脑上</strong>，并<strong>直接与对应服务商通信</strong>，<strong>不经过我们运营的服务器</strong>。我们没有用于存储用户连接器数据的后端。
+</div>
+
+<h2>一、我们处理的数据</h2>
+
+<h3>1. 连接器凭据</h3>
+<p>当你接入某项服务（如 GitHub、Notion、Slack、Instagram、腾讯文档等）时，需要提供该服务的凭据 —— 可能是 API Key、访问令牌（Access Token），或通过 OAuth 授权流程取得的令牌。</p>
+<ul>
+  <li>凭据以 <strong>AES-256-GCM 加密</strong>后保存在你本机的应用数据目录（本地数据库）。</li>
+  <li>凭据仅用于代表你调用该服务，<strong>不会上传到我们的服务器</strong>。</li>
+</ul>
+
+<h3>2. 第三方服务数据</h3>
+<p>当 AI 执行你发起的任务时，会从你已授权的服务读取必要数据（例如邮件、文档、日程、社交平台内容）。这些数据：</p>
+<ul>
+  <li>在<strong>你的设备上</strong>由 Logexus 处理；</li>
+  <li>仅用于完成你发起的该项任务。</li>
+</ul>
+
+<h3>3. AI 任务内容</h3>
+<p>你在应用中输入的任务描述、以及为完成任务而整理出的上下文，会发送给<strong>你自行配置的大模型服务商</strong>（如 Anthropic、OpenAI、DeepSeek，或你自己搭建的推理服务）。使用哪家、传什么，由你决定；这些数据的使用受该服务商自身隐私政策约束，我们不经手。</p>
+
+<h3>4. 账号信息（仅当你注册账号时）</h3>
+<p>Logexus 使用第三方身份服务 <strong>Supabase</strong> 提供账号注册、登录与找回密码功能。该服务仅保存你的<strong>邮箱地址与账号标识</strong>，<strong>不包含</strong>任何连接器凭据或第三方服务数据。你也可以选择不注册账号使用本应用。</p>
+
+<h3>5. 本地数据</h3>
+<p>应用会在本机保存你的浏览记录、笔记、收藏、偏好设置等，均存于你的设备，可随时在应用内清除。</p>
+
+<h3>6. 诊断日志</h3>
+<p>应用在本地写入运行日志，用于排查故障。日志保存在你的设备上，<strong>不会自动上传</strong>；你可以自行查看与删除。</p>
+
+<h2>二、Instagram 数据专节</h2>
+
+<div class="lead">
+Logexus 的 Instagram 连接器通过 <strong>Meta 官方 Instagram Graph API</strong> 接入。以下说明该连接器对 Instagram 数据的处理方式。
+</div>
+
+<h3>2.1 如何取得授权</h3>
+<ul>
+  <li>你需自行在 <strong>Meta 开发者平台</strong>创建一个应用，取得 Instagram 访问令牌（<code>INSTAGRAM_ACCESS_TOKEN</code>），并在 Logexus 中填入。</li>
+  <li>Logexus <strong>不会</strong>替你申请、也<strong>不会</strong>代你持有该令牌之外的任何 Meta 凭据。</li>
+  <li>该令牌<strong>加密保存在你本机</strong>，你可以随时在 Logexus 内删除。</li>
+</ul>
+
+<h3>2.2 可访问的 Instagram 数据</h3>
+<p>依据你在 Meta 侧为该令牌授予的权限，连接器可能访问：</p>
+<ul>
+  <li><strong>账号资料</strong>：用户名、显示名称、账号标识、粉丝与关注数；</li>
+  <li><strong>媒体内容</strong>：你账号发布的帖子、Reels、限时动态及其元数据（文案、时间、媒体链接）；</li>
+  <li><strong>互动数据</strong>：评论及回复、被提及（mentions）、话题标签（hashtag）相关公开内容；</li>
+  <li><strong>私信</strong>（仅在你授予相应权限时）：会话列表与消息内容；</li>
+  <li><strong>账号洞察</strong>：触达、曝光、互动等统计指标。</li>
+</ul>
+
+<h3>2.3 数据如何被使用</h3>
+<p>上述数据<strong>仅用于完成你发起的任务</strong>（例如「列出我最近的帖子并总结评论」「发布一条带图内容」「查看本周账号洞察」）。我们<strong>不会</strong>将 Instagram 数据用于广告、用户画像、数据分析，或任何与你的请求无关的目的。</p>
+
+<h3>2.4 数据存储与传输</h3>
+<ul>
+  <li>Logexus 执行 Instagram 相关任务时，会在<strong>你本机</strong>启动一个本地子进程，通过环境变量把令牌交给它，由它<strong>直接从你的设备调用 Meta 的 API</strong>。</li>
+  <li><strong>令牌与 Instagram 数据都不会经过我们运营的服务器。</strong>我们没有存储 Instagram 数据或令牌的后端。</li>
+  <li>为完成任务，取回的数据会发送给<strong>你自己配置的 AI 服务商</strong>（见第「AI 任务内容」一节）。这是数据的唯一外发路径，且服务商由你选择。</li>
+</ul>
+
+<h3>2.5 共享</h3>
+<p>我们<strong>不出售、不共享、不转让</strong>你的 Instagram 数据给任何第三方。数据仅流向：① 你指定的 AI 服务商；② Meta 官方 API（用于读取或发布内容）。</p>
+
+<h3>2.6 保留与删除</h3>
+<ul>
+  <li>Instagram 令牌保存在你本机，直至你在 Logexus 中删除该连接器凭据。</li>
+  <li>任务过程中产生的临时数据仅存在于本地会话中，任务结束即不再保留（除你主动保存的笔记或结果文件）。</li>
+  <li>卸载 Logexus 会删除本机全部应用数据，包括令牌。</li>
+</ul>
+
+<h3>2.7 撤销授权</h3>
+<p>你可以随时在 <strong>Meta 的账号设置</strong>中撤销该应用/令牌的授权。撤销后，Logexus 的 Instagram 连接器会立即失效。</p>
+
+<h2>三、我们不收集的数据</h2>
+<p>我们不收集个人身份信息（除你主动注册的邮箱）、健康信息、财务与付款信息、精确位置信息，不提供广告服务，也不进行数据分析或用户画像。</p>
+
+<h2>四、数据共享与传输</h2>
+<ul>
+  <li>我们<strong>不向任何第三方出售、共享或传输</strong>你的数据用于其自身目的。</li>
+  <li>数据流向只有三类：① <strong>你授权的第三方服务</strong>（如 Instagram Graph API、Notion、GitHub 等，用于完成你的任务）；② <strong>你自行配置的 AI 服务商</strong>；③ <strong>Supabase</strong>（仅当你注册账号时，且仅涉及邮箱与账号标识）。</li>
+  <li>我们不会为确定信用度或实现贷款而使用或转移数据。</li>
+</ul>
+
+<h2>五、数据安全</h2>
+<ul>
+  <li>连接器凭据以 AES-256-GCM 加密落盘。</li>
+  <li>应用与第三方服务之间使用 HTTPS 通信。</li>
+  <li>由于数据主要保存在你的设备上，请妥善保管你的设备与账号。</li>
+</ul>
+
+<h2>六、你的控制权</h2>
+<ul>
+  <li>随时在应用内<strong>查看、修改或删除</strong>任一连接器的凭据。</li>
+  <li>随时清除本地日志、笔记与缓存。</li>
+  <li>随时卸载应用以删除全部本地数据。</li>
+  <li>如需删除账号，请通过下方邮箱联系我们。</li>
+</ul>
+
+<h2>七、未成年人</h2>
+<p>本应用不面向 13 岁以下儿童，我们不会有意收集其个人信息。</p>
+
+<h2>八、政策更新</h2>
+<p>如本政策发生变更，我们将更新本页面并修订顶部的「最近更新」日期。变更后继续使用本应用即视为接受更新后的政策。</p>
+
+<h2>九、联系我们</h2>
+<div class="contact">
+  <p>如对本隐私权政策、或对 Logexus 处理你的数据有任何疑问、投诉或删除请求，请联系：</p>
+  <p><strong>邮箱：jakmax@163.com</strong></p>
+  <p>我们会在合理期限内回复。</p>
+</div>
+
+<hr>
+
+<!-- ==================== English ==================== -->
+<div class="en">
+<h1>Privacy Policy — Logexus</h1>
+<p class="meta">Effective date: September 20, 2026 &nbsp;|&nbsp; Last updated: September 20, 2026</p>
+
+<p>Logexus is a desktop application (Windows / macOS) that connects artificial intelligence to the services you already use. Once you configure a <em>connector</em>, the AI can read data and perform actions on your behalf to complete tasks you initiate.</p>
+
+<p>This Privacy Policy explains what data Logexus processes, how it is used, stored and shared, and how you can access, export and delete it.</p>
+
+<div class="lead">
+<strong>In one sentence:</strong> Logexus is local-first — your credentials and third-party service data live <strong>on your own computer</strong> and are sent <strong>directly to the relevant service provider</strong>. They <strong>never pass through servers we operate</strong>. We have no backend that stores user connector data.
+</div>
+
+<h2>1. Data We Process</h2>
+
+<h3>1.1 Connector Credentials</h3>
+<p>To connect a service (e.g. GitHub, Notion, Slack, Instagram, Tencent Docs) you supply that service's credentials — an API key, an access token, or a token obtained through an OAuth flow.</p>
+<ul>
+  <li>Credentials are encrypted with <strong>AES-256-GCM</strong> and stored in the application data directory on your device.</li>
+  <li>They are used only to call that service on your behalf and are <strong>never uploaded to our servers</strong>.</li>
+</ul>
+
+<h3>1.2 Third-Party Service Data</h3>
+<p>When the AI performs a task you initiated, it reads the data necessary to complete it (for example email, documents, calendars, or social platform content). Such data is processed <strong>on your device</strong> and used only for that task.</p>
+
+<h3>1.3 AI Task Content</h3>
+<p>The task description you type and the context assembled to complete it are sent to the <strong>large-language-model provider you configure yourself</strong> (e.g. Anthropic, OpenAI, DeepSeek, or your own inference endpoint). Which provider is used and what is sent is your choice; that data is governed by the provider's own privacy policy and does not pass through us.</p>
+
+<h3>1.4 Account Information (only if you register)</h3>
+<p>Logexus uses the third-party identity service <strong>Supabase</strong> for account registration, sign-in and password reset. It stores only your <strong>email address and account identifier</strong> — <strong>no</strong> connector credentials and <strong>no</strong> third-party service data. You may also use the application without registering.</p>
+
+<h3>1.5 Local Data and Diagnostic Logs</h3>
+<p>Browsing history, notes, favourites and preferences are stored locally on your device and can be cleared from within the application at any time. Diagnostic logs are written locally, are <strong>not uploaded automatically</strong>, and can be viewed and deleted by you.</p>
+
+<h2>2. Instagram Data</h2>
+
+<div class="lead">
+Logexus's Instagram connector integrates through <strong>Meta's official Instagram Graph API</strong>. This section describes how that connector handles Instagram data.
+</div>
+
+<h3>2.1 Authorization</h3>
+<ul>
+  <li>You create an app on the <strong>Meta for Developers</strong> platform, obtain an Instagram access token (<code>INSTAGRAM_ACCESS_TOKEN</code>), and enter it into Logexus.</li>
+  <li>Logexus does not apply for the token on your behalf and holds no Meta credential other than the token you provide.</li>
+  <li>The token is <strong>encrypted and stored on your device</strong> and can be deleted from within Logexus at any time.</li>
+</ul>
+
+<h3>2.2 Instagram Data Accessed</h3>
+<p>Depending on the permissions you grant that token on Meta's side, the connector may access:</p>
+<ul>
+  <li><strong>Profile</strong>: username, display name, account identifier, follower/following counts;</li>
+  <li><strong>Media</strong>: posts, Reels and Stories published by your account, with metadata (caption, timestamp, media URLs);</li>
+  <li><strong>Engagement</strong>: comments and replies, mentions, hashtag-related public content;</li>
+  <li><strong>Direct messages</strong> (only with the corresponding permission): conversation lists and message content;</li>
+  <li><strong>Insights</strong>: reach, impressions and interaction metrics.</li>
+</ul>
+
+<h3>2.3 How It Is Used</h3>
+<p>This data is used <strong>solely to complete the task you initiated</strong> (for example, "list my recent posts and summarize the comments", "publish a post", "show this week's account insights"). We do <strong>not</strong> use Instagram data for advertising, profiling, analytics, or any purpose unrelated to your request.</p>
+
+<h3>2.4 Storage and Transfer</h3>
+<ul>
+  <li>For Instagram tasks, Logexus starts a <strong>local subprocess on your machine</strong>, passes the token to it via an environment variable, and that process <strong>calls Meta's API directly from your device</strong>.</li>
+  <li><strong>Neither the token nor the Instagram data passes through servers we operate.</strong> We have no backend storing Instagram data or tokens.</li>
+  <li>To complete a task, retrieved data is sent to the <strong>AI provider you configured</strong> (see "AI Task Content"). That is the only outbound path, and the provider is your choice.</li>
+</ul>
+
+<h3>2.5 Sharing</h3>
+<p>We do <strong>not</strong> sell, share or transfer your Instagram data to any third party. Data flows only to: (i) the AI provider you designate; and (ii) Meta's official API (to read or publish content).</p>
+
+<h3>2.6 Retention and Deletion</h3>
+<ul>
+  <li>The Instagram token remains on your device until you delete the connector credential in Logexus.</li>
+  <li>Transient task data exists only in the local session and is not retained after the task ends (except notes or result files you choose to save).</li>
+  <li>Uninstalling Logexus deletes all local application data, including the token.</li>
+</ul>
+
+<h3>2.7 Revoking Access</h3>
+<p>You may revoke the token or the app's authorization at any time in <strong>Meta's account settings</strong>. Once revoked, the Logexus Instagram connector stops working immediately.</p>
+
+<h2>3. Data We Do Not Collect</h2>
+<p>We do not collect personal identifying information (other than an email address you voluntarily register), health information, financial or payment information, or precise location data. We do not serve advertising and do not perform analytics or user profiling.</p>
+
+<h2>4. Sharing and Transfer</h2>
+<ul>
+  <li>We <strong>do not sell, share or transfer</strong> your data to any third party for their own purposes.</li>
+  <li>Data flows only to: (i) <strong>third-party services you authorised</strong> (e.g. Instagram Graph API, Notion, GitHub), to complete your task; (ii) the <strong>AI provider you configured</strong>; and (iii) <strong>Supabase</strong>, solely for email-based account authentication when you register.</li>
+  <li>We do not use or transfer data to determine creditworthiness or for lending purposes.</li>
+</ul>
+
+<h2>5. Security</h2>
+<ul>
+  <li>Connector credentials are encrypted at rest with AES-256-GCM.</li>
+  <li>All communication with third-party services uses HTTPS.</li>
+  <li>Because data is held primarily on your device, please keep your device and account secure.</li>
+</ul>
+
+<h2>6. Your Controls</h2>
+<ul>
+  <li>View, modify or delete any connector credential at any time within the application.</li>
+  <li>Clear local logs, notes and caches at any time.</li>
+  <li>Uninstall the application to delete all local data.</li>
+  <li>To delete your account, contact us at the address below.</li>
+</ul>
+
+<h2>7. Children</h2>
+<p>The application is not directed to children under 13, and we do not knowingly collect their personal information.</p>
+
+<h2>8. Changes to This Policy</h2>
+<p>If this policy changes, we will update this page and revise the "Last updated" date above. Continued use of the application after a change constitutes acceptance of the updated policy.</p>
+
+<h2>9. Contact</h2>
+<div class="contact">
+  <p>For any question, complaint or deletion request regarding this Privacy Policy or Logexus's handling of your data:</p>
+  <p><strong>Email: jakmax@163.com</strong></p>
+  <p>We will respond within a reasonable period.</p>
+</div>
+</div>
+
+</body>
+</html>
