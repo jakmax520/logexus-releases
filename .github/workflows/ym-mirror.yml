@@ -1,21 +1,23 @@
 # 源 #2（YouMind）效果图镜像。
 #
 # 为什么放在 CI 而不是本地：源图床 cms-assets.youmind.com 在维护者所在网络被
-# DNS 层面封锁（解析到 Meta 地址段、TLS 出示 *.facebook.com 证书），本地直连
-# 必然 rc=60；LightWAN 是隧道型加速器，不提供 HTTP 代理端口且未加速该域名。
-# GitHub runner 不在该网络内，可**原字节直取**，不经任何第三方图片代理，
+# DNS 层面封锁（解析到 Meta 地址段、TLS 出示 *.facebook.com 证书），直连必然
+# rc=60；LightWAN 是隧道型加速器，不提供 HTTP 代理端口且未加速该域名。
+# GitHub runner 不在该网络内，可**原字节直取** —— 不经任何第三方图片代理，
 # 因此没有二次压缩。
 #
-# 下载逻辑复用 Logexus 仓库里那个已离线验证过的脚本，不在此重复实现：
-#   products/tauri-app/scripts/make-ym-thumbs.py
+# 本 workflow **自包含**：清单 ym/sources.json 与脚本 ym/fetch.py 都在本仓库内。
+# 不跨仓库 checkout，因为本仓库的 GITHUB_TOKEN 只对本仓库有效，读不到私有的
+# Logexus 仓库（实测 actions/checkout 会 404）。清单的更新方式是：
+#   Logexus 仓库重跑 bake-prompts-ym.ts parse → 重新生成 sources.json → 提交到这里。
 #
-# ⚠️ 本 workflow 只写 `ym/` 一个目录，**绝不触碰本仓库已有文件**
+# ⚠️ 只写 `ym/` 一个目录，**绝不触碰本仓库已有文件**
 #    （README.md / images/ / thumbs/ / *.html）。提交步骤有硬守卫：
 #    暂存区只要出现 `ym/` 之外的路径就中止，不提交、不推送。
 #
 # 模式：
 #   verify —— 只下载 + 报告张数体积，完全不写盘（默认）
-#   commit —— 下载后把 ym/images 与 ym/thumbs 提交进本仓库
+#   commit —— 下载后提交进本仓库的 ym/
 name: YM mirror
 
 on:
@@ -34,14 +36,7 @@ jobs:
   fetch:
     runs-on: ubuntu-latest
     steps:
-      - name: 检出 logexus-releases
-        uses: actions/checkout@v4
-
-      - name: 检出 Logexus（取清单 + 复用镜像脚本）
-        uses: actions/checkout@v4
-        with:
-          repository: jakmax520/Logexus
-          path: .logexus
+      - uses: actions/checkout@v4
 
       - uses: actions/setup-python@v5
         with:
@@ -49,38 +44,36 @@ jobs:
 
       - run: pip install --quiet pillow
 
-      - name: 下载 181 张原图 + 生成 480px WebP 缩略图
-        run: python3 .logexus/products/tauri-app/scripts/make-ym-thumbs.py --out /tmp/mirror
+      - name: 下载原图 + 生成 480px WebP 缩略图
+        run: python3 ym/fetch.py
 
       - name: 报告
         run: |
-          IMG=$(find /tmp/mirror/ym/images -type f | wc -l | tr -d ' ')
-          THM=$(find /tmp/mirror/ym/thumbs -type f | wc -l | tr -d ' ')
+          IMG=$(find ym/images -type f | wc -l | tr -d ' ')
+          THM=$(find ym/thumbs -type f | wc -l | tr -d ' ')
           {
             echo "### 源 #2 镜像结果"
             echo ""
             echo "| 目录 | 张数 | 体积 |"
             echo "|---|---|---|"
-            echo "| ym/images | ${IMG} | $(du -sh /tmp/mirror/ym/images | cut -f1) |"
-            echo "| ym/thumbs | ${THM} | $(du -sh /tmp/mirror/ym/thumbs | cut -f1) |"
+            echo "| ym/images | ${IMG} | $(du -sh ym/images | cut -f1) |"
+            echo "| ym/thumbs | ${THM} | $(du -sh ym/thumbs | cut -f1) |"
           } >> "$GITHUB_STEP_SUMMARY"
           echo "images 张数: ${IMG}"
           echo "thumbs 张数: ${THM}"
-          du -sh /tmp/mirror/ym/images /tmp/mirror/ym/thumbs
+          du -sh ym/images ym/thumbs
           echo "--- 抽样 3 张原图 ---"
-          find /tmp/mirror/ym/images -type f | sort | head -3 | xargs ls -l
+          find ym/images -type f | sort | head -3 | xargs ls -l
           echo "--- 抽样 3 张缩略图 ---"
-          find /tmp/mirror/ym/thumbs -type f | sort | head -3 | xargs ls -l
+          find ym/thumbs -type f | sort | head -3 | xargs ls -l
 
       - name: 提交进本仓库（仅 commit 模式）
         if: inputs.mode == 'commit'
         run: |
           set -euo pipefail
-          mkdir -p ym
-          cp -R /tmp/mirror/ym/. ym/
           git add ym
 
-          # 硬守卫：本仓库已有文件（README.md / images/ / thumbs/ / *.html）一律不许进暂存区
+          # 硬守卫：本仓库已有文件一律不许进暂存区
           STRAY="$(git diff --cached --name-only | grep -v '^ym/' || true)"
           if [ -n "$STRAY" ]; then
             echo "::error::暂存区出现 ym/ 之外的路径，已中止（未提交、未推送）："
